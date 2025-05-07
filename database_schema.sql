@@ -140,6 +140,10 @@ CREATE TABLE IF NOT EXISTS optionTable (
 INSERT INTO userTable (userName, userPassword, userEmail, userRole, dateCreated, dateUpdated)
 VALUES ('admin', '$2y$10$Vn0iO5jq5RY3e9EOlrCqHOoP3KtaBcqicrHUPwSa8jYZA5Gi4HjJi', 'admin@example.com', 1, NOW(), NOW());
 
+-- Create a faculty profile for the admin user
+INSERT INTO facultyTable (userID_FK, firstName, lastName, middleName)
+VALUES (1, 'Admin', 'User', '');
+
 -- Insert sample data for cognitive skills
 INSERT INTO cognitiveSkillsTable (cogskillsName) VALUES 
 ('Knowledge'),
@@ -180,3 +184,11 @@ INSERT INTO topicsTable (courseCode_FK, topicDesc, contactHours, numUnits) VALUE
 ('DATA301', 'SQL Fundamentals', 9, 1.5),
 ('WEB401', 'HTML and CSS Basics', 6, 1),
 ('WEB401', 'JavaScript Fundamentals', 9, 1.5);
+
+-- Insert faculty assignments for admin
+INSERT INTO assignmentTable (assignmentDate, programID_FK, courseCode_FK, profileID_FK)
+VALUES 
+(NOW(), 1, 'COMP101', 1),
+(NOW(), 1, 'PROG201', 1),
+(NOW(), 2, 'DATA301', 1),
+(NOW(), 1, 'WEB401', 1);

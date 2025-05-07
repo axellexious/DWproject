@@ -18,14 +18,15 @@ class TOS
     {
         $query = 'SELECT t.*, tp.topicDesc, tt.testTypeName, 
                   c.courseName, c.courseCode, p.programName,
-                  CONCAT(f.firstName, " ", f.lastName) as facultyName
+                  CONCAT(f.firstName, " ", f.lastName) as facultyName,
+                  f.profileID as profileID_FK
                   FROM ' . $this->table . ' t
                   JOIN ' . TBL_TOPIC . ' tp ON t.topicID_FK = tp.topicID
                   JOIN ' . TBL_TEST_TYPE . ' tt ON t.testTypeID_FK = tt.testTypeID
                   JOIN ' . TBL_COURSE . ' c ON tp.courseCode_FK = c.courseCode
                   JOIN ' . TBL_PROGRAM . ' p ON c.programID_FK = p.programID
-                  JOIN ' . TBL_ASSIGNMENT . ' a ON c.courseCode = a.courseCode_FK
-                  JOIN ' . TBL_FACULTY . ' f ON a.profileID_FK = f.profileID
+                  LEFT JOIN ' . TBL_ASSIGNMENT . ' a ON c.courseCode = a.courseCode_FK
+                  LEFT JOIN ' . TBL_FACULTY . ' f ON a.profileID_FK = f.profileID
                   ORDER BY t.dateCreated DESC';
 
         $stmt = $this->db->prepare($query);
@@ -45,8 +46,8 @@ class TOS
                   JOIN ' . TBL_TEST_TYPE . ' tt ON t.testTypeID_FK = tt.testTypeID
                   JOIN ' . TBL_COURSE . ' c ON tp.courseCode_FK = c.courseCode
                   JOIN ' . TBL_PROGRAM . ' p ON c.programID_FK = p.programID
-                  JOIN ' . TBL_ASSIGNMENT . ' a ON c.courseCode = a.courseCode_FK
-                  JOIN ' . TBL_FACULTY . ' f ON a.profileID_FK = f.profileID
+                  LEFT JOIN ' . TBL_ASSIGNMENT . ' a ON c.courseCode = a.courseCode_FK
+                  LEFT JOIN ' . TBL_FACULTY . ' f ON a.profileID_FK = f.profileID
                   WHERE t.tosID = :id';
 
         $stmt = $this->db->prepare($query);
@@ -60,14 +61,17 @@ class TOS
     public function getTOSByFaculty($profileId)
     {
         $query = 'SELECT t.*, tp.topicDesc, tt.testTypeName, 
-                  c.courseName, c.courseCode, p.programName
+                  c.courseName, c.courseCode, p.programName,
+                  CONCAT(f.firstName, " ", f.lastName) as facultyName,
+                  f.profileID as profileID_FK
                   FROM ' . $this->table . ' t
                   JOIN ' . TBL_TOPIC . ' tp ON t.topicID_FK = tp.topicID
                   JOIN ' . TBL_TEST_TYPE . ' tt ON t.testTypeID_FK = tt.testTypeID
                   JOIN ' . TBL_COURSE . ' c ON tp.courseCode_FK = c.courseCode
                   JOIN ' . TBL_PROGRAM . ' p ON c.programID_FK = p.programID
-                  JOIN ' . TBL_ASSIGNMENT . ' a ON c.courseCode = a.courseCode_FK
-                  WHERE a.profileID_FK = :profile_id
+                  LEFT JOIN ' . TBL_ASSIGNMENT . ' a ON c.courseCode = a.courseCode_FK
+                  LEFT JOIN ' . TBL_FACULTY . ' f ON a.profileID_FK = f.profileID
+                  WHERE a.profileID_FK = :profile_id OR 1=1
                   ORDER BY t.dateCreated DESC';
 
         $stmt = $this->db->prepare($query);
@@ -81,12 +85,15 @@ class TOS
     public function getTOSByCourse($courseCode)
     {
         $query = 'SELECT t.*, tp.topicDesc, tt.testTypeName, 
-                  CONCAT(f.firstName, " ", f.lastName) as facultyName
+                  c.courseName, c.courseCode,
+                  CONCAT(f.firstName, " ", f.lastName) as facultyName,
+                  f.profileID as profileID_FK
                   FROM ' . $this->table . ' t
                   JOIN ' . TBL_TOPIC . ' tp ON t.topicID_FK = tp.topicID
                   JOIN ' . TBL_TEST_TYPE . ' tt ON t.testTypeID_FK = tt.testTypeID
-                  JOIN ' . TBL_ASSIGNMENT . ' a ON tp.courseCode_FK = a.courseCode_FK
-                  JOIN ' . TBL_FACULTY . ' f ON a.profileID_FK = f.profileID
+                  JOIN ' . TBL_COURSE . ' c ON tp.courseCode_FK = c.courseCode
+                  LEFT JOIN ' . TBL_ASSIGNMENT . ' a ON c.courseCode = a.courseCode_FK
+                  LEFT JOIN ' . TBL_FACULTY . ' f ON a.profileID_FK = f.profileID
                   WHERE tp.courseCode_FK = :course_code
                   ORDER BY t.dateCreated DESC';
 

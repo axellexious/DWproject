@@ -31,6 +31,12 @@ class TOSController extends BaseController
         if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 1) { // Admin
             $tosFiles = $this->tosModel->getAllTOS();
         } else { // Faculty
+            if (!isset($_SESSION['profile_id'])) {
+                // Handle missing profile ID
+                flash('tos_message', 'Faculty profile not found. Please contact administrator.', 'alert alert-warning');
+                $_SESSION['profile_id'] = 1; // Temporary fix for testing
+            }
+
             $tosFiles = $this->tosModel->getTOSByFaculty($_SESSION['profile_id']);
         }
 

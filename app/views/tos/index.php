@@ -91,7 +91,7 @@
                                 <td><?php echo $tos['topicDesc']; ?></td>
                                 <td><?php echo $tos['testTypeName']; ?></td>
                                 <td><?php echo $tos['courseCode']; ?> - <?php echo $tos['courseName']; ?></td>
-                                <td><?php echo $tos['facultyName']; ?></td>
+                                <td><?php echo isset($tos['facultyName']) ? $tos['facultyName'] : 'System'; ?></td>
                                 <td><?php echo date('M d, Y', strtotime($tos['dateCreated'])); ?></td>
                                 <td>
                                     <div class="btn-group">
@@ -101,7 +101,12 @@
                                         <a href="<?php echo BASE_URL; ?>/tos/view/<?php echo $tos['tosID']; ?>" class="btn btn-sm btn-outline-secondary">
                                             <i class="bi bi-eye"></i> View
                                         </a>
-                                        <?php if ($_SESSION['user_role'] == 1 || $_SESSION['profile_id'] == $tos['profileID_FK']) : ?>
+                                        <?php if (
+                                            $_SESSION['user_role'] == 1 ||
+                                            (isset($_SESSION['profile_id']) &&
+                                                isset($tos['profileID_FK']) &&
+                                                $_SESSION['profile_id'] == $tos['profileID_FK'])
+                                        ) : ?>
                                             <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $tos['tosID']; ?>">
                                                 <i class="bi bi-trash"></i> Delete
                                             </button>
