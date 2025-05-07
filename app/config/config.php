@@ -8,7 +8,7 @@ define('BASE_URL', 'http://localhost/exam-system');
 define('APPROOT', dirname(dirname(__FILE__)));
 
 // Upload directory
-define('UPLOAD_DIR', dirname(dirname(dirname(__FILE__))) . '/public/uploads/');
+define('UPLOAD_DIR', dirname(dirname(__FILE__)) . '/public/uploads/');
 
 // Document formats allowed
 define('ALLOWED_DOC_FORMATS', ['doc', 'docx', 'xls', 'xlsx']);

@@ -1,7 +1,7 @@
 # Enable URL rewriting
 RewriteEngine On
 
-# RewriteBase directive (adjust if your application is not in the root directory)
+# RewriteBase directive
 RewriteBase /exam-system/
 
 # Redirect all requests to index.php unless the file or directory exists

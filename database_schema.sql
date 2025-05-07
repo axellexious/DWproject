@@ -8,7 +8,7 @@ USE exam_system;
 CREATE TABLE IF NOT EXISTS userTable (
   userID INT AUTO_INCREMENT COMMENT 'Primary Key',
   userName VARCHAR(10) NOT NULL,
-  UserPassword VARCHAR(100) NOT NULL,
+  userPassword VARCHAR(100) NOT NULL,
   userEmail VARCHAR(40) NOT NULL UNIQUE,
   userRole INT NOT NULL DEFAULT 2, -- 1=Admin, 2=Faculty
   dateCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS optionTable (
 );
 
 -- Insert default admin user (password: admin123)
-INSERT INTO userTable (userName, UserPassword, userEmail, userRole, dateCreated, dateUpdated)
+INSERT INTO userTable (userName, userPassword, userEmail, userRole, dateCreated, dateUpdated)
 VALUES ('admin', '$2y$10$Vn0iO5jq5RY3e9EOlrCqHOoP3KtaBcqicrHUPwSa8jYZA5Gi4HjJi', 'admin@example.com', 1, NOW(), NOW());
 
 -- Insert sample data for cognitive skills

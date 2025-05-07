@@ -28,8 +28,10 @@ class User
             return false;
         }
 
-        // Verify password
-        if (password_verify($password, $user['UserPassword'])) {
+        // Verify password - check both camelCase and PascalCase for compatibility
+        if (isset($user['userPassword']) && password_verify($password, $user['userPassword'])) {
+            return $user;
+        } elseif (isset($user['UserPassword']) && password_verify($password, $user['UserPassword'])) {
             return $user;
         } else {
             return false;
@@ -75,12 +77,9 @@ class User
 
         $stmt = $this->db->prepare($query);
 
-        // Hash password
-        $password_hash = password_hash($data['password'], PASSWORD_DEFAULT);
-
         // Bind values
         $stmt->bindParam(':username', $data['username']);
-        $stmt->bindParam(':password', $password_hash);
+        $stmt->bindParam(':password', $data['password']);
         $stmt->bindParam(':email', $data['email']);
         $stmt->bindParam(':role', $data['role']);
 

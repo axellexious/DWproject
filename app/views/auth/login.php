@@ -30,6 +30,10 @@
                         <button type="submit" class="btn btn-primary">Login <i class="bi bi-box-arrow-in-right"></i></button>
                     </div>
                 </form>
+
+                <div class="text-center mt-3">
+                    <small>Don't have an account? <a href="<?php echo BASE_URL; ?>/register">Register here</a></small>
+                </div>
             </div>
             <div class="card-footer text-center">
                 <small class="text-muted">AI-Generated Exam System &copy; <?php echo date('Y'); ?></small>

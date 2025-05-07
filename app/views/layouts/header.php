@@ -15,7 +15,7 @@
 
 <body>
     <?php if (isLoggedIn()) : ?>
-        <?php require_once 'nav.php'; ?>
+        <?php require_once APPROOT . '/views/layouts/nav.php'; ?>
     <?php endif; ?>
 
     <div class="container py-4">
