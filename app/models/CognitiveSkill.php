@@ -1,6 +1,6 @@
 <?php
 // app/models/CognitiveSkill.php
-require_once '../app/config/database.php';
+require_once 'app/config/database.php';
 
 class CognitiveSkill
 {

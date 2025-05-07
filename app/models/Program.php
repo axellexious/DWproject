@@ -1,6 +1,6 @@
 <?php
 // app/models/Program.php
-require_once '../app/config/database.php';
+require_once 'app/config/database.php';
 
 class Program
 {

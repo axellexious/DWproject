@@ -1,6 +1,6 @@
 <?php
 // app/controllers/AuthController.php
-require_once 'BaseController.php';
+require_once 'app/controllers/BaseController.php';
 
 class AuthController extends BaseController
 {

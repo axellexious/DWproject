@@ -1,6 +1,6 @@
 <?php
 // app/controllers/DashboardController.php
-require_once 'BaseController.php';
+require_once 'app/controllers/BaseController.php';
 
 class DashboardController extends BaseController
 {

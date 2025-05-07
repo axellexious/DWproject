@@ -1,6 +1,6 @@
 <?php
 // app/controllers/ErrorController.php
-require_once 'BaseController.php';
+require_once 'app/controllers/BaseController.php';
 
 class ErrorController extends BaseController
 {

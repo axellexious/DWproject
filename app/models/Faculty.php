@@ -1,6 +1,6 @@
 <?php
 // app/models/Faculty.php
-require_once '../app/config/database.php';
+require_once 'app/config/database.php';
 
 class Faculty
 {
