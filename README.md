@@ -62,6 +62,9 @@ The application follows the MVC (Model-View-Controller) architecture:
   - Password: admin123
   - Role: Administrator
 
+## Contributors
+- James Allen M. Josue (axellexious)
+   
 ## License
 
 This project is licensed under the MIT License.
